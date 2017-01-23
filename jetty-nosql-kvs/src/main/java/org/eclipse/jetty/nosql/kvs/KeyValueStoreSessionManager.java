@@ -387,7 +387,6 @@ public class KeyValueStoreSessionManager extends NoSqlSessionManager
     }
 
     /*------------------------------------------------------------ */
-    @Override
     protected void invalidateSessions() throws Exception
     {
         // do nothing.
@@ -397,7 +396,7 @@ public class KeyValueStoreSessionManager extends NoSqlSessionManager
 
     /*------------------------------------------------------------ */
     @Override
-    protected void invalidateSession(final String idInCluster)
+    public void invalidateSession(final String idInCluster)
     {
         // do nothing.
         // invalidated sessions will not save in KeyValueStoreSessionManager.save()
@@ -455,28 +454,6 @@ public class KeyValueStoreSessionManager extends NoSqlSessionManager
         return ((KeyValueStoreSessionIdManager) _sessionIdManager).deleteKey(mangleKey(idInCluster));
     }
 
-    /**
-     * @deprecated from 0.3.1. use #{@link org.eclipse.jetty.nosql.kvs.KeyValueStoreSessionManager#getSessionFactory()}
-     *             instead.
-     */
-    @Deprecated
-    public AbstractSessionFactory getSessionFacade()
-    {
-        return sessionFactory;
-    }
-
-    /**
-     * @deprecated from 0.3.1. use #
-     *             {@link KeyValueStoreSessionManager#setSessionFactory(org.eclipse.jetty.nosql.kvs.session.AbstractSessionFactory)}
-     *             instead.
-     */
-    @Deprecated
-    public void setSessionFacade(final AbstractSessionFactory sf)
-    {
-        log.warn("deprecated setter `setSessionFacade' was called. this will be removed in future release.");
-        this.sessionFactory = sf;
-    }
-
     public AbstractSessionFactory getSessionFactory()
     {
         return sessionFactory;
@@ -485,24 +462,6 @@ public class KeyValueStoreSessionManager extends NoSqlSessionManager
     public void setSessionFactory(final AbstractSessionFactory sf)
     {
         this.sessionFactory = sf;
-    }
-
-    /**
-     * @deprecated from 0.3.0. this is false by default and is not an option.
-     */
-    @Deprecated
-    public void setSticky(final boolean sticky)
-    { // TODO: remove
-        log.warn("deprecated setter `setSticky' was called. this will be removed in future release.");
-    }
-
-    /**
-     * @deprecated from 0.3.0. this is false by default and is not an option.
-     */
-    @Deprecated
-    public boolean isSticky()
-    { // TODO: remove
-        return false;
     }
 
     @Override

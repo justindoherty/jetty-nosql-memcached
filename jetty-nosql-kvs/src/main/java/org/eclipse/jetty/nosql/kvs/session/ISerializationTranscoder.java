@@ -21,16 +21,17 @@ public interface ISerializationTranscoder {
 	 * serialize an object to byte array
 	 * @param obj to serialize
 	 * @return serialized data
-	 * @throws Exception
+	 * @throws TranscoderException exception
 	 */
 	public byte[] encode(Object obj) throws TranscoderException;
 
 	/**
 	 * deserialize object(s) from byte array
+	 * @param <T> type
 	 * @param raw data
 	 * @param klass of serialized data
 	 * @return deserialized object(s)
-	 * @throws Exception
+	 * @throws TranscoderException exception
 	 */
 	public <T> T decode(byte[] raw, Class<T> klass) throws TranscoderException;
 }
